@@ -27,7 +27,7 @@ public class Employees {
     private String address;
     private String position;
     private String image;
-    private String CitizenIdentificationCard;
+    private String citizenIdentificationCard;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private StatusEmployee status;

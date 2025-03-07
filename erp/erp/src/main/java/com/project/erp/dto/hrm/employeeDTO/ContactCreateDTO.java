@@ -1,10 +1,5 @@
-package com.project.erp.entities.hrm;
+package com.project.erp.dto.hrm.employeeDTO;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,22 +7,16 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Builder
 @Data
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
-@Entity
-public class Contracts {
-    @Id
-    private Integer id;
+@NoArgsConstructor
+public class ContactCreateDTO {
     private String title;
     private LocalDateTime contractSigningDate;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private Double baseSalary;
     private String description;
-    @ManyToOne
-    @JoinColumn
-    private Employees employee;
-
+    private Integer employeeId;
 }

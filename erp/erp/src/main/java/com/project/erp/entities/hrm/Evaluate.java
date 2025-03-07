@@ -27,4 +27,8 @@ public class Evaluate {
     @ManyToOne
     @JoinColumn
     private CandidateProfile candidateProfile;
+
+    @ManyToOne
+    @JoinColumn
+    private Employees createBy;
 }
