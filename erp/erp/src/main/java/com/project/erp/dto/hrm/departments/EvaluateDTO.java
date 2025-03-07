@@ -1,5 +1,6 @@
 package com.project.erp.dto.hrm.departments;
 
+import com.project.erp.dto.hrm.employeeDTO.EmployeeDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,4 +18,6 @@ public class EvaluateDTO {
     private LocalDateTime feedbackAt;
     private String suggest;
     private String evaluate;
+    private EmployeeDTO employeeDTO;
+    private CandidateProfileDTO candidateProfileDTO;
 }
