@@ -2,11 +2,13 @@ package com.project.erp.mapper.hrm;
 
 import com.project.erp.dto.hrm.departments.*;
 import com.project.erp.dto.hrm.employeeDTO.ContactDTO;
+import com.project.erp.dto.hrm.employeeDTO.EmployeeCreateDTO;
 import com.project.erp.dto.hrm.employeeDTO.EmployeeDTO;
 import com.project.erp.entities.hrm.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -116,5 +118,26 @@ public class EmployeeMapper {
         return employees.stream().map(this::toEmployeeDTO).collect(Collectors.toList());
     }
 
+    public Employees employeeCreateToEmployee(EmployeeCreateDTO employeeCreateDTO){
+        Employees employees = new Employees();
+        employees.setId(getGenerationId());
+        employees.setFirstName(employeeCreateDTO.getFirstName());
+        employees.setLastName(employeeCreateDTO.getLastName());
+        employees.setEmail(employeeCreateDTO.getEmail());
+        employees.setPhone(employeeCreateDTO.getPhone());
+        employees.setGender(employeeCreateDTO.getGender());
+        employees.setDateOfBirth(employeeCreateDTO.getDateOfBirth());
+        employees.setCitizenIdentificationCard(employeeCreateDTO.getCitizenIdentificationCard());
+        employees.setAddress(employeeCreateDTO.getAddress());
+        Departments departments = new Departments();
+        departments.setId(employeeCreateDTO.getDepartmentId());
+        employees.setDepartment(departments);
+        return employees;
+    }
 
+
+    public Integer getGenerationId() {
+        UUID uuid = UUID.randomUUID();
+        return (int) (uuid.getMostSignificantBits() & 0xFFFFFFFFL);
+    }
 }
