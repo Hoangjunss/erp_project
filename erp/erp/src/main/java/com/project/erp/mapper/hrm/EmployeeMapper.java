@@ -17,18 +17,18 @@ public class EmployeeMapper {
     // TODO: convert entities to dto
 
     public EmployeeDTO toEmployeeDTO(Employees employees){
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setId(employees.getId());
-        employeeDTO.setFirstName(employees.getFirstName());
-        employeeDTO.setLastName(employees.getLastName());
-        employeeDTO.setEmail(employees.getEmail());
-        employeeDTO.setPhone(employees.getPhone());
-        employeeDTO.setGender(employees.getGender());
-        employeeDTO.setDateOfBirth(employees.getDateOfBirth());
-        employeeDTO.setCitizenIdentificationCard(employees.getCitizenIdentificationCard());
-        employeeDTO.setAddress(employees.getAddress());
-        employeeDTO.setDepartmentDTO(toDepartmentDTO(employees.getDepartment()));
-        return employeeDTO;
+        return EmployeeDTO.builder()
+                .id(getGenerationId())
+                .firstName(employees.getFirstName())
+                .lastName(employees.getLastName())
+                .email(employees.getEmail())
+                .phone(employees.getPhone())
+                .gender(employees.getGender())
+                .dateOfBirth(employees.getDateOfBirth())
+                 .citizenIdentificationCard(employees.getCitizenIdentificationCard())
+                 .address(employees.getAddress())
+                 .departmentDTO(toDepartmentDTO(employees.getDepartment()))
+                .build();
     }
 
     public DepartmentDTO toDepartmentDTO(Departments departments){
@@ -40,6 +40,18 @@ public class EmployeeMapper {
         departmentDTO.setEmail(departments.getEmail());
         departmentDTO.setDescription(departments.getDescription());
         return departmentDTO;
+    }
+
+    public Departments toDepartment(DepartmentDTO departmentDTO){
+        return Departments.builder()
+                .id(departmentDTO.getId())
+                .address(departmentDTO.getAddress())
+                .phone(departmentDTO.getPhone())
+                .email(departmentDTO.getEmail())
+                .departmentName(departmentDTO.getDepartmentName())
+                .description(departmentDTO.getDescription())
+                .description(departmentDTO.getDescription())
+                .build();
     }
 
     public RecruitmentRequirementsDTO toRecruitmentRequirementsDTO(RecruitmentRequirements recruitmentRequirements){
@@ -118,21 +130,19 @@ public class EmployeeMapper {
         return employees.stream().map(this::toEmployeeDTO).collect(Collectors.toList());
     }
 
-    public Employees employeeCreateToEmployee(EmployeeCreateDTO employeeCreateDTO){
-        Employees employees = new Employees();
-        employees.setId(getGenerationId());
-        employees.setFirstName(employeeCreateDTO.getFirstName());
-        employees.setLastName(employeeCreateDTO.getLastName());
-        employees.setEmail(employeeCreateDTO.getEmail());
-        employees.setPhone(employeeCreateDTO.getPhone());
-        employees.setGender(employeeCreateDTO.getGender());
-        employees.setDateOfBirth(employeeCreateDTO.getDateOfBirth());
-        employees.setCitizenIdentificationCard(employeeCreateDTO.getCitizenIdentificationCard());
-        employees.setAddress(employeeCreateDTO.getAddress());
-        Departments departments = new Departments();
-        departments.setId(employeeCreateDTO.getDepartmentId());
-        employees.setDepartment(departments);
-        return employees;
+    public Employees employeeCreateToEmployee(EmployeeCreateDTO employeeCreateDTO, DepartmentDTO departmentDTO){
+        return Employees.builder()
+                .id(getGenerationId())
+                .firstName(employeeCreateDTO.getFirstName())
+                .lastName(employeeCreateDTO.getLastName())
+                .email(employeeCreateDTO.getEmail())
+                .phone(employeeCreateDTO.getPhone())
+                 .gender(employeeCreateDTO.getGender())
+                 .dateOfBirth(employeeCreateDTO.getDateOfBirth())
+                 .citizenIdentificationCard(employeeCreateDTO.getCitizenIdentificationCard())
+                 .address(employeeCreateDTO.getAddress())
+                 .department(toDepartment(departmentDTO))
+                .build();
     }
 
 
