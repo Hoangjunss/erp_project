@@ -1,6 +1,5 @@
 package com.project.erp.dto.hrm.employeeDTO;
 
-import com.project.erp.entities.Enum.StatusEmployee;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
