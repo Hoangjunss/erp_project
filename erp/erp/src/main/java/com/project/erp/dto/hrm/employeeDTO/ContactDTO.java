@@ -19,4 +19,5 @@ public class ContactDTO {
     private LocalDateTime endDate;
     private Double baseSalary;
     private String description;
+    private EmployeeDTO employeeDTO;
 }
