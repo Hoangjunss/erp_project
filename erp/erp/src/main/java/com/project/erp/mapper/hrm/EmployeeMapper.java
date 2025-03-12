@@ -4,6 +4,7 @@ import com.project.erp.dto.hrm.departments.*;
 import com.project.erp.dto.hrm.employeeDTO.ContactDTO;
 import com.project.erp.dto.hrm.employeeDTO.EmployeeCreateDTO;
 import com.project.erp.dto.hrm.employeeDTO.EmployeeDTO;
+import com.project.erp.dto.hrm.employeeDTO.EmployeeUpdateDTO;
 import com.project.erp.entities.hrm.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -38,6 +39,21 @@ public class EmployeeMapper {
                 .build();
     }
 
+    public Employees toEntity(EmployeeDTO employeeDTO){
+        return Employees.builder()
+                .id(employeeDTO.getId())
+                .firstName(employeeDTO.getFirstName())
+                .lastName(employeeDTO.getLastName())
+                .email(employeeDTO.getEmail())
+                .phone(employeeDTO.getPhone())
+                 .gender(employeeDTO.getGender())
+                 .dateOfBirth(employeeDTO.getDateOfBirth())
+                 .citizenIdentificationCard(employeeDTO.getCitizenIdentificationCard())
+                 .address(employeeDTO.getAddress())
+                 .department(departmentMapper.toDepartment(employeeDTO.getDepartmentDTO()))
+                .build();
+    }
+
     public ContactDTO toContactDTO(Contracts contracts){
         ContactDTO contactDTO = new ContactDTO();
         contactDTO.setId(contracts.getId());
@@ -67,6 +83,10 @@ public class EmployeeMapper {
                  .address(employeeCreateDTO.getAddress())
                  .department(departmentMapper.toDepartment(departmentDTO))
                 .build();
+    }
+
+    public Employees employeeUpdateToEmployee(EmployeeUpdateDTO employeeUpdateDTO, DepartmentDTO departmentDTO){
+        return Employees.builder().build();
     }
 
 
